@@ -1,4 +1,4 @@
-from pydantic import EmailStr
+from pydantic import BaseModel, EmailStr
 from sqlmodel import Field, Relationship, SQLModel
 
 
@@ -8,6 +8,7 @@ class UserBase(SQLModel):
     is_active: bool = True
     is_superuser: bool = False
     full_name: str | None = Field(default=None, max_length=255)
+    credits: int = Field(default=0)
 
 
 # Properties to receive via API on creation
@@ -108,3 +109,18 @@ class TokenPayload(SQLModel):
 class NewPassword(SQLModel):
     token: str
     new_password: str = Field(min_length=8, max_length=40)
+
+
+class InputData(BaseModel):
+    married: float
+    income: float
+    education: float
+    loan_amount: float
+    credit_history: float
+
+
+class Functions(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    model1: bool = Field(default=False)
+    model2: bool = Field(default=False)
+    model3: bool = Field(default=False)
