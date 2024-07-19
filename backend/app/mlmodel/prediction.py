@@ -5,11 +5,11 @@ from app.models import InputData
 
 
 class PredictionService:
-    def __init__(self, model_name):
+    def __init__(self, model_name) -> None:
         self.model = load_model(model_name)
         self.scaler = load_scaler(model_name)  # Pass the model_name to load_scaler
 
-    def predict(self, input_data: InputData):
+    def predict(self, input_data: InputData) -> dict[str, int]:
         x_values = np.array(
             [
                 [
