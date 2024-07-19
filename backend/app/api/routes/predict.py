@@ -7,13 +7,14 @@ from app.models import Functions, InputData, User
 
 router = APIRouter()
 
+
 @router.post("/predict/{model_name}")
 async def predict_endpoint(
     model_name: str,
     input_data: InputData,
     session: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
-):
+) -> dict[str, int]:
     if model_name not in ["model1", "model2", "model3"]:
         raise HTTPException(status_code=400, detail="Invalid model name")
 

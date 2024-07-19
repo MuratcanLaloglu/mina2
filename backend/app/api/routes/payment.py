@@ -1,3 +1,5 @@
+from typing import Any
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlmodel import Session, select
 
@@ -6,12 +8,13 @@ from app.models import Functions, User
 
 router = APIRouter()
 
+
 @router.post("/payment/{option}")
 async def process_payment(
     option: str,
     session: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
-):
+) -> dict[str, Any]:
     if option not in ["model1", "model2", "model3", "all"]:
         raise HTTPException(status_code=400, detail="Invalid payment option")
 
