@@ -6,4 +6,4 @@ def load_model(model_name):
 
 
 def load_scaler(model_name):
-    return joblib.load(f"./models/Scaler{model_name[-1]}.pkl")
+    return joblib.load(f"backend/app/mlmodel/models/Scaler{model_name[-1]}.pkl")

@@ -8,7 +8,6 @@ class UserBase(SQLModel):
     is_active: bool = True
     is_superuser: bool = False
     full_name: str | None = Field(default=None, max_length=255)
-    credits: int = Field(default=0)
 
 
 # Properties to receive via API on creation
@@ -124,3 +123,4 @@ class Functions(SQLModel, table=True):
     model1: bool = Field(default=False)
     model2: bool = Field(default=False)
     model3: bool = Field(default=False)
+    credits: int = Field(default=0)
