@@ -5,7 +5,7 @@ from app.models import InputData
 
 
 class PredictionService:
-    def __init__(self, model_name) -> None:
+    def __init__(self, model_name: str) -> None:
         self.model = load_model(model_name)
         self.scaler = load_scaler(model_name)  # Pass the model_name to load_scaler
 
