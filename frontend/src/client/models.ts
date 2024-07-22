@@ -97,3 +97,11 @@ export type ValidationError = {
   msg: string
   type: string
 }
+
+export type InputData = {
+  married: number
+  income: number
+  education: number
+  loan_amount: number
+  credit_history: number
+}
