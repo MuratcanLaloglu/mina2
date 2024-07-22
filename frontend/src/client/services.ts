@@ -515,3 +515,34 @@ export class ItemsService {
     })
   }
 }
+
+export const makePayment = async (option: string) => {
+  const response = await fetch(`/api/payment/${option}`, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+  });
+
+  if (!response.ok) {
+      throw new Error(await response.text());
+  }
+
+  return response.json();
+};
+
+export const makePrediction = async (modelName: string, inputData: any) => {
+  const response = await fetch(`/api/predict/${modelName}`, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(inputData),
+  });
+
+  if (!response.ok) {
+      throw new Error(await response.text());
+  }
+
+  return response.json();
+};
