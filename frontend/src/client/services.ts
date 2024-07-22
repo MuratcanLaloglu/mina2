@@ -18,6 +18,7 @@ import type {
   ItemPublic,
   ItemsPublic,
   ItemUpdate,
+  InputData
 } from "./models"
 
 export type TDataLoginAccessToken = {
@@ -159,6 +160,15 @@ export type TDataUpdateUser = {
 }
 export type TDataDeleteUser = {
   userId: number
+}
+
+export type TDataMakePayment = {
+  option: string;
+}
+
+export type TDataMakePrediction = {
+  modelName: string;
+  inputData: InputData;
 }
 
 export class UsersService {
@@ -516,33 +526,47 @@ export class ItemsService {
   }
 }
 
-export const makePayment = async (option: string) => {
-  const response = await fetch(`/api/payment/${option}`, {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json',
+export class PaymentService {
+  /**
+   * Make Payment
+   * Process a payment for the selected option
+   * @returns Message Successful Response
+   * @throws ApiError
+   */
+  public static makePayment(
+    data: TDataMakePayment
+  ): CancelablePromise<Message> {
+    const { option } = data;
+    return __request(OpenAPI, {
+      method: "POST",
+      url: `/api/v1/payment/${option}`,
+      mediaType: "application/json",
+      errors: {
+        422: `Validation Error`,
       },
-  });
-
-  if (!response.ok) {
-      throw new Error(await response.text());
+    });
   }
+}
 
-  return response.json();
-};
-
-export const makePrediction = async (modelName: string, inputData: any) => {
-  const response = await fetch(`/api/predict/${modelName}`, {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json',
+export class PredictionService {
+  /**
+   * Make Prediction
+   * Generate a prediction using the specified model and input data
+   * @returns Message Successful Response
+   * @throws ApiError
+   */
+  public static makePrediction(
+    data: TDataMakePrediction
+  ): CancelablePromise<Message> {
+    const { modelName, inputData } = data;
+    return __request(OpenAPI, {
+      method: "POST",
+      url: `/api/v1/predict/${modelName}`,
+      body: inputData,
+      mediaType: "application/json",
+      errors: {
+        422: `Validation Error`,
       },
-      body: JSON.stringify(inputData),
-  });
-
-  if (!response.ok) {
-      throw new Error(await response.text());
+    });
   }
-
-  return response.json();
-};
+}

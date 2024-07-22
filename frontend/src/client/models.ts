@@ -34,6 +34,7 @@ export type ItemsPublic = {
 }
 
 export type Message = {
+  credits_added: any
   message: string
 }
 
