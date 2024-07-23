@@ -38,6 +38,11 @@ export type Message = {
   message: string
 }
 
+export type Message2 = {
+  prediction: number;
+  credits_left: number; 
+};
+
 export type NewPassword = {
   token: string
   new_password: string
