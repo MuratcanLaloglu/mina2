@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import useAuth from '../../hooks/useAuth';
 import { PaymentService } from '../../client';
+import { Button, Select } from '@chakra-ui/react';
 
 const Payment = () => {
     const { user } = useAuth();
@@ -31,16 +32,16 @@ const Payment = () => {
         <div>
             <h2>Make a Payment</h2>
             <p>Current user: {user?.email}</p>
-            <select value={option} onChange={(e) => setOption(e.target.value)}>
+            <Select value={option} onChange={(e) => setOption(e.target.value)}>
                 <option value="">Select an option</option>
                 <option value="model1">Model 1 ($30)</option>
                 <option value="model2">Model 2 ($60)</option>
                 <option value="model3">Model 3 ($90)</option>
                 <option value="all">All Models ($100)</option>
-            </select>
-            <button onClick={handlePayment} disabled={!option || isLoading}>
+            </Select>
+            <Button onClick={handlePayment} disabled={!option || isLoading}>
                 {isLoading ? 'Processing...' : 'Pay'}
-            </button>
+            </Button>
             {message && <p>{message}</p>}
         </div>
     );

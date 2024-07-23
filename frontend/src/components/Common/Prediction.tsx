@@ -2,6 +2,7 @@ import { useState } from 'react';
 import useAuth from '../../hooks/useAuth';
 import { PredictionService } from '../../client';
 import { InputData, Message2 } from '../../client';
+import { Button, Input, Select } from '@chakra-ui/react';
 
 const Prediction = () => {
     const { user } = useAuth();
@@ -55,7 +56,7 @@ const Prediction = () => {
         <div>
             <h2>Make a Prediction</h2>
             <p>Current user: {user?.email}</p>
-            <select 
+            <Select 
                 value={modelName} 
                 onChange={(e) => setModelName(e.target.value)}
                 disabled={isLoading}
@@ -64,12 +65,12 @@ const Prediction = () => {
                 <option value="model1">Model 1</option>
                 <option value="model2">Model 2</option>
                 <option value="model3">Model 3</option>
-            </select>
+            </Select>
 
             <div>
                 <label>
                     Married:
-                    <input
+                    <Input
                         type="number"
                         name="married"
                         value={inputData.married}
@@ -82,7 +83,7 @@ const Prediction = () => {
             <div>
                 <label>
                     Income:
-                    <input
+                    <Input
                         type="number"
                         name="income"
                         value={inputData.income}
@@ -95,7 +96,7 @@ const Prediction = () => {
             <div>
                 <label>
                     Education:
-                    <input
+                    <Input
                         type="number"
                         name="education"
                         value={inputData.education}
@@ -108,7 +109,7 @@ const Prediction = () => {
             <div>
                 <label>
                     Loan Amount:
-                    <input
+                    <Input
                         type="number"
                         name="loan_amount"
                         value={inputData.loan_amount}
@@ -121,7 +122,7 @@ const Prediction = () => {
             <div>
                 <label>
                     Credit History:
-                    <input
+                    <Input
                         type="number"
                         name="credit_history"
                         value={inputData.credit_history}
@@ -131,9 +132,9 @@ const Prediction = () => {
                 </label>
             </div>
 
-            <button onClick={handlePrediction} disabled={isLoading || !modelName}>
+            <Button onClick={handlePrediction} disabled={isLoading || !modelName}>
                 {isLoading ? 'Processing...' : 'Predict'}
-            </button>
+            </Button>
 
             {error && <p style={{ color: 'red' }}>{error}</p>}
             {result && (
