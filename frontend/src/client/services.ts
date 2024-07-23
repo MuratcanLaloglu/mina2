@@ -18,7 +18,8 @@ import type {
   ItemPublic,
   ItemsPublic,
   ItemUpdate,
-  InputData
+  InputData,
+  Message2
 } from "./models"
 
 export type TDataLoginAccessToken = {
@@ -557,7 +558,7 @@ export class PredictionService {
    */
   public static makePrediction(
     data: TDataMakePrediction
-  ): CancelablePromise<Message> {
+  ): CancelablePromise<Message2> {
     const { modelName, inputData } = data;
     return __request(OpenAPI, {
       method: "POST",
