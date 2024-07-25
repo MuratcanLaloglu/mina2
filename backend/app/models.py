@@ -124,3 +124,87 @@ class Functions(SQLModel, table=True):
     model2: bool = Field(default=False)
     model3: bool = Field(default=False)
     credits: int = Field(default=0)
+
+class CommercialCustomer(SQLModel, table=True):
+    id: int = Field(default=None, primary_key=True)
+    company_name: str
+    contact_person_first_name: str
+    contact_person_last_name: str
+    contact_person_position: str
+    address_street: str
+    address_city: str
+    address_state: str
+    address_zip_code: str
+    address_country: str
+    phone_number: str
+    email: str
+    website: str
+    tax_id: str
+    business_type: str
+
+
+class PersonalCustomer(SQLModel, table=True):
+    id: int = Field(default=None, primary_key=True)
+    first_name: str
+    last_name: str
+    address_street: str
+    address_city: str
+    address_state: str
+    address_zip_code: str
+    address_country: str
+    phone_number: str
+    email: str
+    date_of_birth: str
+    gender: str
+    occupation: str
+
+
+class Project(SQLModel, table=True):
+    id: int = Field(default=None, primary_key=True)
+    project_name: str
+    description: str
+    start_date: str
+    end_date: str
+    budget: float
+    client_company_name: str
+    client_contact_person_first_name: str
+    client_contact_person_last_name: str
+    client_contact_person_position: str
+    client_phone_number: str
+    client_email: str
+    status: str
+
+
+class Employee(SQLModel, table=True):
+    id: int = Field(default=None, primary_key=True)
+    first_name: str
+    last_name: str
+    address_street: str
+    address_city: str
+    address_state: str
+    address_zip_code: str
+    address_country: str
+    phone_number: str
+    email: str
+    date_of_birth: str
+    gender: str
+    position: str
+    department: str
+    salary: float
+    date_hired: str
+
+
+class Competitor(SQLModel, table=True):
+    id: int = Field(default=None, primary_key=True)
+    company_name: str
+    address_street: str
+    address_city: str
+    address_state: str
+    address_zip_code: str
+    address_country: str
+    phone_number: str
+    email: str
+    website: str
+    industry: str
+    number_of_employees: int
+    annual_revenue: float
